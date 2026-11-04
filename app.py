@@ -32,6 +32,7 @@ import audit
 import config
 import detector
 import scoring
+import stylometry
 
 MAX_TEXT_CHARS = 5000
 
@@ -230,9 +231,8 @@ def submit():
     except detector.DetectorUnavailable as exc:
         return jsonify({"error": "detector_unavailable", "message": str(exc)}), 503
 
-    # Only one signal is wired in so far, so it stands in for the combined score.
-    style_score = None
-    combined_score = model_score
+    style_score = stylometry.style_signal(text)
+    combined_score = scoring.combine_signals(model_score, style_score)
     guess, label = scoring.score_to_label(combined_score)
     confidence = round(max(combined_score, 1 - combined_score), 4)
 

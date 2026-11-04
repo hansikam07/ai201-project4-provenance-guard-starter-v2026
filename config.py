@@ -57,6 +57,12 @@ DETECTOR_MAX_TOKENS = 400
 WEIGHT_MODEL_SIGNAL = 0.5
 WEIGHT_STYLE_SIGNAL = 0.5
 
+# When the two signals are further apart than DISAGREEMENT_GAP, the combined
+# score is pulled toward 0.5 by DISAGREEMENT_PULL (0.5 halves its distance from
+# 0.5). See scoring.combine_signals.
+DISAGREEMENT_GAP = 0.4
+DISAGREEMENT_PULL = 0.5
+
 
 # ─── Thresholds (Milestone 5) ────────────────────────────────────────────────
 # Where one label becomes another. Scores run 0.0 (confidently human) to 1.0
