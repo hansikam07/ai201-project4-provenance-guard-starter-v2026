@@ -42,62 +42,43 @@ Two things worth knowing before you pick numbers:
   a **miss**.
 
 ---
-## 1.
+## 1. False positives
 
-<!-- Your criterion. It must name a number. -->
+Of 10 paragraphs I wrote myself, at most 1 is labeled high-confidence AI, in each of 3 trials.
 
-
-
-**Why this target:**
-
-
+**Why this target:** I don't want to wrongly accuse a real writer, but I also don't want AI text to go unflagged, so I allow only 1 in 10. A wrongly accused writer loses trust in the site, while a missed AI post costs the site much less.
 
 ---
 
-## 2.
+## 2. Score spread
 
-<!-- Your criterion. -->
+The combined score of my clearly-AI sample is at least 0.35 higher than the combined score of my clearly-human sample.
 
-
-
-**Why this target:**
-
-
+**Why this target:** My "unsure" band is 0.30 wide (0.35 to 0.65). A gap of 0.35 means a clearly-AI and a clearly-human sample can land in different labels. A smaller gap would let both end up "unsure", and the score wouldn't tell anyone anything.
 
 ---
 
-## 3.
+## 3. Label coverage
 
-<!-- Your criterion. -->
+Across 5 or more test texts (clearly AI, clearly human, borderline, plain writing, formal writing), my service returns each of the three labels at least once, in each of 3 trials. `scoring.label_ranges()` shows no gap between the bands.
 
-
-
-**Why this target:**
-
-
+**Why this target:** If a label can never appear, the system is broken without anyone noticing. My style signal may barely vary, which would make one label unreachable.
 
 ---
 
-## 4.
+## 4. Appeal path
 
-<!-- Your criterion. -->
+For 5 of 5 appeals on real content_ids, `GET /log` shows an appeal entry with status `under_review` next to the original decision. An appeal on a content_id that doesn't exist returns a 404 and writes nothing to the log.
 
-
-
-**Why this target:**
-
-
+**Why this target:** Wrong flags can happen, so the appeal is the only thing a wrongly accused writer can do. If even one appeal isn't recorded, that writer has no recourse.
 
 ---
 
-## 5.
+## 5. Bad input
 
-<!-- Your criterion. -->
+A request with missing, null, empty or whitespace-only `text`, or with `text` over 5,000 characters, returns HTTP 400 with a JSON error saying bad input. None of them return a 500 or crash the service.
 
-
-
-**Why this target:**
-
+**Why this target:** A request with no text gives the detector nothing to test, and the detector raises an error on very short text. The detector only reads about 400 tokens, so I don't accept far more than it can use.
 
 
 ---
