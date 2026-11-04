@@ -98,8 +98,8 @@ A paragraph about growing tomatoes on a balcony scored model 0.6895 and style 0.
 **What I'm honest about:**
 
 - **The two signals are not very independent.** Both tend to score plain, uniform writing high. Short sentences with common words look predictable to gpt2 and also look evenly shaped to the stylometry, so they agree for the same underlying reason and the disagreement rule rarely has anything to catch.
-- **A false positive.** My plain-human calibration text scored model 0.7846, style 0.7475 and combined 0.7661, and the service guessed "ai". A person wrote that style of text; the service accused it.
-- **It happened again.** A human text with very uniform sentence lengths scored combined 0.7831 and was also guessed "ai".
+- **A false positive.** My plain-human calibration text (a stand-in written to imitate plain, short-sentence human writing) scored model 0.7846, style 0.7475 and combined 0.7661, and the service guessed "ai". Real people write this way, so this is the kind of writer the service would accuse.
+- **It happened again.** A stand-in human text with very uniform sentence lengths scored combined 0.7831 and was also guessed "ai".
 - **I did not change thresholds to hide this.** The bands are still 0.35 and 0.65. I'm reporting these as findings rather than tuning them away on five samples.
 - **My test paragraphs aren't my own writing.** The borderline test paragraphs (and the other calibration texts) were written by an AI tool as stand-ins for human writing, not by me. My own writing gets tested next unit.
 
@@ -226,11 +226,12 @@ The first entry in that output is an earlier calibration submission (`creator_id
 
 ## How I Used AI
 
+
 **Moment 1**
 
-- *What I asked for:* a draft of five acceptance criteria to start from.
-- *What came back:* five criteria with defaults (at most 2 false positives in 10, a 0.30 score gap, a 10,000 character cap).
-- *What I changed:* I made the false-positive target tighter, at most 1 in 10, and wrote my own reasons. I raised the score gap to 0.35 so it matched my 0.30-wide unsure band, and I cut the text cap to 5,000 characters because the detector only reads about 400 tokens.
+- *What I asked for:* help getting started on my five acceptance criteria. I asked for a template and then for step-by-step questions, one criterion at a time.
+- *What came back:* a draft set of five criteria with starting numbers (at most 1 false positive in 10, a 0.30 score gap, a 10,000 character cap), plus suggested wording and reasons.
+- *What I changed:* I made the decisions by answering the questions: at most 1 false positive in 10 for my own reasons, a score gap of 0.35 to match my 0.30-wide unsure band, a text cap of 5,000 characters because the detector only reads about 400 tokens, 5 of 5 appeals, and a 404 for a fake content_id. The AI wrote out the final wording of the criteria and their reasons from my answers, and I kept it as written.
 
 **Moment 2**
 
