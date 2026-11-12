@@ -716,6 +716,139 @@ Against before: the highest combined score among my 9 human texts went from 0.63
 ```
 
 
+### Second Improvement (stretch)
+
+**What I changed:** In `config.py`, `AI_THRESHOLD` went from 0.65 to 0.80. Nothing else changed: the weights stay at 0.8 model and 0.2 style, and the human threshold, the disagreement rule, the signals, the routes and the test files are the same. `scoring.label_ranges()` now reads 0.00–0.35 human, 0.35–0.80 unsure, 0.80–1.00 AI. Only `scoring.py` (`score_to_label` and `label_ranges`) reads the threshold, so combined scores do not change, only the label they get.
+
+**Which diagnosis pointed at it:** The one for FP02 to FP07 (real writing labeled AI, signal one). After the first improvement those six scored 0.7315, 0.7796, 0.7794, 0.7935, 0.8176 and 0.8331, all just above the old line. I would rather let AI text through than falsely accuse writers, so I raised the line.
+
+**Five-criteria run log, after2** (`results/run_2026-11-12_1031_after2.md` and `results/appeal_check_2026-11-12_1031_after2.json`; all three trials identical):
+
+| Criterion | Target (from criteria.md) | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. False positives | Of 10 paragraphs I wrote myself, at most 1 is labeled high-confidence AI, in each of 3 trials. | 0 of 9 labeled ai; max combined 0.6312 | 0 of 9 labeled ai; max combined 0.6312 | 0 of 9 labeled ai; max combined 0.6312 | MET |
+| 2. Score spread | The combined score of my clearly-AI sample is at least 0.35 higher than the combined score of my clearly-human sample. | AI mean 0.7317, human mean 0.4791, gap 0.2526 | AI mean 0.7317, human mean 0.4791, gap 0.2526 | AI mean 0.7317, human mean 0.4791, gap 0.2526 | MISSED |
+| 3. Label coverage | Across 5 or more test texts (clearly AI, clearly human, borderline, plain writing, formal writing), my service returns each of the three labels at least once, in each of 3 trials. `scoring.label_ranges()` shows no gap between the bands. | labels seen: ai, unsure; never: human | labels seen: ai, unsure; never: human | labels seen: ai, unsure; never: human | MISSED |
+| 4. Appeal path | For 5 of 5 appeals on real content_ids, `GET /log` shows an appeal entry with status `under_review` next to the original decision. An appeal on a content_id that doesn't exist returns a 404 and writes nothing to the log. | 5 of 5 appeals logged as under_review; fake id: 404, nothing written | 5 of 5 appeals logged as under_review; fake id: 404, nothing written | 5 of 5 appeals logged as under_review; fake id: 404, nothing written | MET |
+| 5. Bad input | A request with missing, null, empty or whitespace-only `text`, or with `text` over 5,000 characters, returns HTTP 400 with a JSON error saying bad input. None of them return a 500 or crash the service. | 5 of 5 returned 400 | 5 of 5 returned 400 | 5 of 5 returned 400 | MET |
+
+| | before | after | after2 |
+|---|---|---|---|
+| highest combined among my 9 human texts | 0.63 | 0.6312 | 0.6312 |
+| AI mean − human mean | 0.14 | 0.2526 | 0.2526 |
+| lowest combined of my 16 eval texts | 0.4165 | 0.3714 | 0.3714 |
+| verdicts (1–5) | MET MISSED MISSED MET MET | MET MISSED MISSED MET MET | MET MISSED MISSED MET MET |
+
+No criterion changed verdict. Criteria 1, 4 and 5 are still met, and 2 and 3 are still missed. That is expected: the threshold changes which label a score gets, not the scores, so the spread (0.2526) and my lowest text (0.3714) are the same as after the first improvement.
+
+**Counts, before, after and after2 (held / broke):**
+
+| family | before held | before broke | after held | after broke | after2 held | after2 broke |
+|---|---|---|---|---|---|---|
+| evasion | 1 | 9 | 1 | 9 | 1 | 9 |
+| false_positive | 2 | 6 | 2 | 6 | 6 | 2 |
+| prompt_injection | 4 | 2 | 3 | 3 | 3 | 3 |
+| malformed | 19 | 1 | 17 | 3 | 19 | 1 |
+| flood_same_creator | 12 | 0 | 12 | 0 | 12 | 0 |
+| **total** | 38 | 18 | 35 | 21 | 41 | 15 |
+
+**Attack changes, after to after2.** Six marks changed, all fixes, and nothing newly broke:
+
+| id | family | after mark | after2 mark | after combined | after2 combined | label change | direction |
+|---|---|---|---|---|---|---|---|
+| FP02 | false_positive | broke | held | 0.7315 | 0.7315 | ai → unsure | fixed |
+| FP03 | false_positive | broke | held | 0.7796 | 0.7796 | ai → unsure | fixed |
+| FP04 | false_positive | broke | held | 0.7794 | 0.7794 | ai → unsure | fixed |
+| FP05 | false_positive | broke | held | 0.7935 | 0.7935 | ai → unsure | fixed |
+| MF06 | malformed | broke | held | 0.6988 | 0.6988 | ai → unsure | fixed |
+| MF07 | malformed | broke | held | 0.6626 | 0.6626 | ai → unsure | fixed |
+
+FP06 (0.8176) and FP07 (0.8331) are still labeled AI because they score above 0.80. MF06 and MF07 were newly broken by the first improvement and are held again, so MF07, the real Arabic sentence, is no longer labeled AI. For malformed attacks I counted an AI verdict as the label `ai`. By the older cut of combined 0.65 or higher, MF06 (0.6988) and MF07 (0.6626) would still count as broke. No evasion mark changed: 9 of 10 still broke.
+
+**Did it help, and what did it cost:** It helped on false positives: 4 of the 6 broken ones (FP02 to FP05) are no longer labeled AI, and false-positive broke went from 6 to 2. Total attacks went from 35 held and 21 broke after the first improvement to 41 held and 15 broke, and from 38 held and 18 broke before either change. The cost is on the AI side. Of my 5 AI texts, only AI3 (0.8375) is still labeled AI; AI1, AI2, AI4 and AI5 (0.7369, 0.7493, 0.6603 and 0.6744) went from AI back to "unsure", which undoes what the first improvement had gained. Across the 56 attacks, 10 decisions carried the AI label after the first improvement and 4 do after this one (EV10, FP06, FP07, MF05). Evasion is untouched: the AI text that evades still gets "unsure" or "human". My own texts did not change label at all between before and after2, and the highest (H1, 0.6312) is now 0.1688 under the AI line instead of 0.0188.
+
+**Full 56-row after2 table, with the after mark** (changed rows in bold; scores and marks from `results/attack_marks_after2.md`):
+
+| id | family | targets | HTTP | model | style | combined | guess / result | after mark | after2 mark |
+|---|---|---|---|---|---|---|---|---|---|
+| EV01 | evasion | signal two: typos raise word variety | 200 | 0.1635 | 0.5654 | 0.3719 | unsure | broke | broke |
+| EV02 | evasion | signal two: broken-up sentences raise length spread | 200 | 0.5943 | 0.3416 | 0.5438 | unsure | broke | broke |
+| EV03 | evasion | signal two: a pasted quotation changes the shape | 200 | 0.6662 | 0.4366 | 0.6203 | unsure | broke | broke |
+| EV04 | evasion | signal one: unusual words raise perplexity | 200 | 0.6114 | 0.5593 | 0.601 | unsure | broke | broke |
+| EV05 | evasion | both signals: heavy human editing pass | 200 | 0.3212 | 0.3934 | 0.3356 | human | broke | broke |
+| EV06 | evasion | signal two: one very long sentence and one very short | 200 | 0.5727 | 0.404 | 0.539 | unsure | broke | broke |
+| EV07 | evasion | signal two: padding with punctuation | 200 | 0.5862 | 0.2723 | 0.5234 | unsure | broke | broke |
+| EV08 | evasion | signal one: text below the token window | 200 | 0.2452 | 0.5488 | 0.3059 | human | broke | broke |
+| EV09 | evasion | both: AI text with a human opening paragraph bolted on | 200 | 0.7042 | 0.4135 | 0.6461 | unsure | broke | broke |
+| EV10 | evasion | signal two: repeated stanza structure | 200 | 0.9792 | 0.8359 | 0.9505 | ai | held | held |
+| FP01 | false_positive | plain, clear human writing with no flourishes | 200 | 0.6175 | 0.6103 | 0.6161 | unsure | held | held |
+| **FP02** | **false_positive** | **human writing in a formal register** | **200** | **0.7387** | **0.7025** | **0.7315** | **unsure** | **broke** | **held** |
+| **FP03** | **false_positive** | **a non-native English speaker writing carefully** | **200** | **0.8051** | **0.6775** | **0.7796** | **unsure** | **broke** | **held** |
+| **FP04** | **false_positive** | **a student essay written to a rubric** | **200** | **0.8329** | **0.5654** | **0.7794** | **unsure** | **broke** | **held** |
+| **FP05** | **false_positive** | **technical documentation written by a person** | **200** | **0.8005** | **0.7656** | **0.7935** | **unsure** | **broke** | **held** |
+| FP06 | false_positive | a person imitating a formal template | 200 | 0.8814 | 0.5623 | 0.8176 | ai | broke | broke |
+| FP07 | false_positive | human writing that repeats a phrase deliberately | 200 | 0.8816 | 0.639 | 0.8331 | ai | broke | broke |
+| FP08 | false_positive | very short genuine human submission | 200 | 0.3223 | 0.6529 | 0.3884 | unsure | held | held |
+| PI01 | prompt_injection | instruction to ignore the check | 200 | 0.4625 | 0.3906 | 0.4481 | unsure | broke | broke |
+| PI02 | prompt_injection | instruction disguised as a system message | 200 | 0.2044 | 0.321 | 0.2277 | human | broke | broke |
+| PI03 | prompt_injection | instruction wrapped in the writer's voice | 200 | 0.5943 | 0.4631 | 0.5681 | unsure | broke | broke |
+| PI04 | prompt_injection | attempt to make the label text hostile | 200 | 0.4998 | 0.4344 | 0.4867 | unsure | held | held |
+| PI05 | prompt_injection | attempt to inject into the audit log | 200 | 0.6401 | 0.1369 | 0.5197 | unsure | held | held |
+| PI06 | prompt_injection | instruction plus real human text | 200 | 0.5583 | 0.5932 | 0.5653 | unsure | held | held |
+| MF01 | malformed | text is only whitespace | 400 | — | — | — | bad_input | held | held |
+| MF02 | malformed | text is a single character | 400 | — | — | — | bad_input | held | held |
+| MF03 | malformed | text is control characters | 200 | 0.0 | 0.6667 | 0.3167 | human | held | held |
+| MF04 | malformed | text is only punctuation | 200 | 0.0112 | 0.5 | 0.3045 | human | held | held |
+| MF05 | malformed | text is a very long single word | 200 | 0.9976 | 0.6667 | 0.9314 | ai | broke | broke |
+| **MF06** | **malformed** | **text is emoji only** | **200** | **0.9969** | **0.5** | **0.6988** | **unsure** | **broke** | **held** |
+| **MF07** | **malformed** | **text is right-to-left script** | **200** | **0.9064** | **0.5** | **0.6626** | **unsure** | **broke** | **held** |
+| MF08 | malformed | text is 60,000 characters | 400 | — | — | — | bad_input | held | held |
+| RQ01 | malformed | no text field at all | 400 | — | — | — | bad_input | held | held |
+| RQ02 | malformed | no creator_id | 400 | — | — | — | bad_input | held | held |
+| RQ03 | malformed | text is a number | 400 | — | — | — | bad_input | held | held |
+| RQ04 | malformed | text is a list | 400 | — | — | — | bad_input | held | held |
+| RQ05 | malformed | text is null | 400 | — | — | — | bad_input | held | held |
+| RQ06 | malformed | creator_id is an object | 400 | — | — | — | bad_input | held | held |
+| RQ07 | malformed | body is a JSON array, not an object | 400 | — | — | — | bad_input | held | held |
+| RQ08 | malformed | body is unparseable JSON | 400 | — | — | — | bad_input | held | held |
+| RQ09 | malformed | body is empty | 400 | — | — | — | bad_input | held | held |
+| RQ10 | malformed | body is form-encoded, not JSON | 400 | — | — | — | bad_input | held | held |
+| RQ11 | malformed | body is JSON claiming to be plain text | 400 | — | — | — | bad_input | held | held |
+| RQ12 | malformed | deeply nested JSON | 400 | — | — | — | bad_input | held | held |
+| FL01_01 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_02 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_03 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_04 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_05 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_06 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_07 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_08 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_09 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_10 | flood_same_creator | 20 rapid submissions from one creator | 200 | 0.0287 | 0.6667 | 0.3281 | human | held | held |
+| FL01_11 | flood_same_creator | 20 rapid submissions from one creator | 429 | — | — | — | rate_limited | held | held |
+| FL01_12 | flood_same_creator | 20 rapid submissions from one creator | 429 | — | — | — | rate_limited | held | held |
+
+**After2 audit entries, exactly as stored:**
+
+**Log line 490 — FP03, a fixed false positive (0.7796, now unsure)**
+
+```json
+{"timestamp": "2026-11-12T16:29:24+00:00", "content_id": "29cafe94-3175-4ef7-92a4-bcd07f9395e3", "creator_id": "attacker_FP03", "guess": "unsure", "model_score": 0.8051, "style_score": 0.6775, "combined_score": 0.7796, "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.", "status": "decided"}
+```
+
+**Log line 494 — FP07, a still-broken false positive (0.8331, still labeled AI)**
+
+```json
+{"timestamp": "2026-11-12T16:29:25+00:00", "content_id": "2e89e41a-87d4-45b0-bcc4-270b7cab644a", "creator_id": "attacker_FP07", "guess": "ai", "model_score": 0.8816, "style_score": 0.639, "combined_score": 0.8331, "label": "This looks like it may have been generated by AI. These checks can be wrong. If you wrote it yourself, you can appeal and it will be marked for review.", "status": "decided"}
+```
+
+**Log line 534 — H1, my highest-scoring own writing (0.6312, unsure)**
+
+```json
+{"timestamp": "2026-11-12T16:31:22+00:00", "content_id": "9b5b16c0-0128-4d91-a63e-32d6553d79c6", "creator_id": "c1_H1", "guess": "unsure", "model_score": 0.632, "style_score": 0.6281, "combined_score": 0.6312, "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.", "status": "decided"}
+```
+
+
 ---
 
 ## Stretch
@@ -732,6 +865,8 @@ Stretch feature I am adding: a second measured improvement. Change: AI_THRESHOLD
 Scores below are the after-run numbers from `results/attack_marks_after.md` and `results/run_2026-11-12_1014_after.md`.
 
 **FP02 to FP07 (real writing labeled AI, signal one).** After the reweight they score 0.7315, 0.7796, 0.7794, 0.7935, 0.8176 and 0.8331. I would raise `AI_THRESHOLD` above 0.65 so only the most confident cases get the AI label, but the numbers don't give me a value I can defend. My own five AI texts score between 0.6603 and 0.8375, so they overlap the false positives (0.7315 to 0.8331). Raising the line to 0.80 clears FP02 to FP05 but leaves FP06 and FP07 labeled AI, and only 1 of my 5 AI texts is still labeled AI. At 0.84 all six false positives drop to "unsure", but so do all five of my AI texts, and only EV10 (0.9505) and the repeated-letter MF05 (0.9314) are left with the AI label. The cost is the same at every value: more AI text labeled "unsure" and less caught. So I am not naming a fix value. *Why I stopped:* this unit allows one improvement and I used it on the weights.
+
+**Stretch update:** I made the threshold change in the stretch, raising `AI_THRESHOLD` to 0.80. FP02 to FP05 (0.7315 to 0.7935) are now labeled "unsure", but FP06 (0.8176) and FP07 (0.8331) are still labeled AI, and 4 of my 5 AI texts lost their AI label (see "Second Improvement (stretch)").
 
 **EV01 to EV09 (AI text not caught).** 9 of the 10 evasion attacks broke before and after the reweight; only EV10 was caught. I would replace or retune the style signal, since it separated my AI and human texts by -0.066 (AI mean minus human mean). *Why I stopped:* the same one-change limit, and a new signal needs its own testing.
 
