@@ -1,0 +1,539 @@
+[
+  {
+    "trial": 1,
+    "appeals": [
+      {
+        "creator_id": "c4_t1_1",
+        "submit_status": 200,
+        "content_id": "544168e1-1715-4d66-89da-674af1a84c9a",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "544168e1-1715-4d66-89da-674af1a84c9a",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4201,
+            "content_id": "544168e1-1715-4d66-89da-674af1a84c9a",
+            "creator_id": "c4_t1_1",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.3639,
+            "status": "decided",
+            "style_score": 0.645,
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          },
+          {
+            "content_id": "544168e1-1715-4d66-89da-674af1a84c9a",
+            "creator_id": "c4_t1_1",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 1, appeal 1).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t1_2",
+        "submit_status": 200,
+        "content_id": "906e7991-f1a0-43e2-a1bf-8bb864c6a12d",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "906e7991-f1a0-43e2-a1bf-8bb864c6a12d",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5545,
+            "content_id": "906e7991-f1a0-43e2-a1bf-8bb864c6a12d",
+            "creator_id": "c4_t1_2",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.6074,
+            "status": "decided",
+            "style_score": 0.3428,
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          },
+          {
+            "content_id": "906e7991-f1a0-43e2-a1bf-8bb864c6a12d",
+            "creator_id": "c4_t1_2",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 1, appeal 2).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t1_3",
+        "submit_status": 200,
+        "content_id": "5be31a74-219b-4927-b040-499a07e7d7a5",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "5be31a74-219b-4927-b040-499a07e7d7a5",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4718,
+            "content_id": "5be31a74-219b-4927-b040-499a07e7d7a5",
+            "creator_id": "c4_t1_3",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4922,
+            "status": "decided",
+            "style_score": 0.3904,
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          },
+          {
+            "content_id": "5be31a74-219b-4927-b040-499a07e7d7a5",
+            "creator_id": "c4_t1_3",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 1, appeal 3).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:45+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t1_4",
+        "submit_status": 200,
+        "content_id": "0ca5c14a-36da-4425-a451-34f2feabffdb",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "0ca5c14a-36da-4425-a451-34f2feabffdb",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.6312,
+            "content_id": "0ca5c14a-36da-4425-a451-34f2feabffdb",
+            "creator_id": "c4_t1_4",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.632,
+            "status": "decided",
+            "style_score": 0.6281,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "0ca5c14a-36da-4425-a451-34f2feabffdb",
+            "creator_id": "c4_t1_4",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 1, appeal 4).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t1_5",
+        "submit_status": 200,
+        "content_id": "7b5d2b29-7300-4142-bc76-4e7567b85f24",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "7b5d2b29-7300-4142-bc76-4e7567b85f24",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5269,
+            "content_id": "7b5d2b29-7300-4142-bc76-4e7567b85f24",
+            "creator_id": "c4_t1_5",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4919,
+            "status": "decided",
+            "style_score": 0.6667,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "7b5d2b29-7300-4142-bc76-4e7567b85f24",
+            "creator_id": "c4_t1_5",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 1, appeal 5).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      }
+    ],
+    "fake_id": {
+      "status": 404,
+      "response": {
+        "error": "not_found"
+      },
+      "log_entries_before": 457,
+      "log_entries_after": 457,
+      "ok": true
+    }
+  },
+  {
+    "trial": 2,
+    "appeals": [
+      {
+        "creator_id": "c4_t2_1",
+        "submit_status": 200,
+        "content_id": "b2634aac-e3d7-4128-aad6-459c62c42fac",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "b2634aac-e3d7-4128-aad6-459c62c42fac",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4201,
+            "content_id": "b2634aac-e3d7-4128-aad6-459c62c42fac",
+            "creator_id": "c4_t2_1",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.3639,
+            "status": "decided",
+            "style_score": 0.645,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "b2634aac-e3d7-4128-aad6-459c62c42fac",
+            "creator_id": "c4_t2_1",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 2, appeal 1).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t2_2",
+        "submit_status": 200,
+        "content_id": "8d96d759-5a06-41a4-b9b2-6013febb52c4",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "8d96d759-5a06-41a4-b9b2-6013febb52c4",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5545,
+            "content_id": "8d96d759-5a06-41a4-b9b2-6013febb52c4",
+            "creator_id": "c4_t2_2",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.6074,
+            "status": "decided",
+            "style_score": 0.3428,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "8d96d759-5a06-41a4-b9b2-6013febb52c4",
+            "creator_id": "c4_t2_2",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 2, appeal 2).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t2_3",
+        "submit_status": 200,
+        "content_id": "e49acc97-1abe-4c3b-9629-610ac7fe19a5",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "e49acc97-1abe-4c3b-9629-610ac7fe19a5",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4718,
+            "content_id": "e49acc97-1abe-4c3b-9629-610ac7fe19a5",
+            "creator_id": "c4_t2_3",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4922,
+            "status": "decided",
+            "style_score": 0.3904,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "e49acc97-1abe-4c3b-9629-610ac7fe19a5",
+            "creator_id": "c4_t2_3",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 2, appeal 3).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t2_4",
+        "submit_status": 200,
+        "content_id": "a8c3e37d-18f2-482a-8ceb-468cff1149ef",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "a8c3e37d-18f2-482a-8ceb-468cff1149ef",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.6312,
+            "content_id": "a8c3e37d-18f2-482a-8ceb-468cff1149ef",
+            "creator_id": "c4_t2_4",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.632,
+            "status": "decided",
+            "style_score": 0.6281,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "a8c3e37d-18f2-482a-8ceb-468cff1149ef",
+            "creator_id": "c4_t2_4",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 2, appeal 4).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t2_5",
+        "submit_status": 200,
+        "content_id": "477dc475-8a14-40c2-8975-9f5ca4936779",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "477dc475-8a14-40c2-8975-9f5ca4936779",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5269,
+            "content_id": "477dc475-8a14-40c2-8975-9f5ca4936779",
+            "creator_id": "c4_t2_5",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4919,
+            "status": "decided",
+            "style_score": 0.6667,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "477dc475-8a14-40c2-8975-9f5ca4936779",
+            "creator_id": "c4_t2_5",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 2, appeal 5).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      }
+    ],
+    "fake_id": {
+      "status": 404,
+      "response": {
+        "error": "not_found"
+      },
+      "log_entries_before": 467,
+      "log_entries_after": 467,
+      "ok": true
+    }
+  },
+  {
+    "trial": 3,
+    "appeals": [
+      {
+        "creator_id": "c4_t3_1",
+        "submit_status": 200,
+        "content_id": "e302aabd-e44d-4eb1-9218-7264ee67bad2",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "e302aabd-e44d-4eb1-9218-7264ee67bad2",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4201,
+            "content_id": "e302aabd-e44d-4eb1-9218-7264ee67bad2",
+            "creator_id": "c4_t3_1",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.3639,
+            "status": "decided",
+            "style_score": 0.645,
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          },
+          {
+            "content_id": "e302aabd-e44d-4eb1-9218-7264ee67bad2",
+            "creator_id": "c4_t3_1",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 3, appeal 1).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:46+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t3_2",
+        "submit_status": 200,
+        "content_id": "ebd8a0f8-2113-4f1e-bb8d-e53eb3f2bbd4",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "ebd8a0f8-2113-4f1e-bb8d-e53eb3f2bbd4",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5545,
+            "content_id": "ebd8a0f8-2113-4f1e-bb8d-e53eb3f2bbd4",
+            "creator_id": "c4_t3_2",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.6074,
+            "status": "decided",
+            "style_score": 0.3428,
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          },
+          {
+            "content_id": "ebd8a0f8-2113-4f1e-bb8d-e53eb3f2bbd4",
+            "creator_id": "c4_t3_2",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 3, appeal 2).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t3_3",
+        "submit_status": 200,
+        "content_id": "f06d5089-57af-4b17-8c9d-e6ee8a3dc0c5",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "f06d5089-57af-4b17-8c9d-e6ee8a3dc0c5",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.4718,
+            "content_id": "f06d5089-57af-4b17-8c9d-e6ee8a3dc0c5",
+            "creator_id": "c4_t3_3",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4922,
+            "status": "decided",
+            "style_score": 0.3904,
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          },
+          {
+            "content_id": "f06d5089-57af-4b17-8c9d-e6ee8a3dc0c5",
+            "creator_id": "c4_t3_3",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 3, appeal 3).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t3_4",
+        "submit_status": 200,
+        "content_id": "2de04ee8-50a3-4c70-b63a-82a2a2ebbc94",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "2de04ee8-50a3-4c70-b63a-82a2a2ebbc94",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.6312,
+            "content_id": "2de04ee8-50a3-4c70-b63a-82a2a2ebbc94",
+            "creator_id": "c4_t3_4",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.632,
+            "status": "decided",
+            "style_score": 0.6281,
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          },
+          {
+            "content_id": "2de04ee8-50a3-4c70-b63a-82a2a2ebbc94",
+            "creator_id": "c4_t3_4",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 3, appeal 4).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          }
+        ],
+        "ok": true
+      },
+      {
+        "creator_id": "c4_t3_5",
+        "submit_status": 200,
+        "content_id": "d3399d30-e246-4387-93a7-acca9e798fad",
+        "appeal_status": 200,
+        "appeal_response": {
+          "content_id": "d3399d30-e246-4387-93a7-acca9e798fad",
+          "message": "Your appeal has been recorded and this item is marked for review.",
+          "status": "under_review"
+        },
+        "log_entries_for_id": [
+          {
+            "combined_score": 0.5269,
+            "content_id": "d3399d30-e246-4387-93a7-acca9e798fad",
+            "creator_id": "c4_t3_5",
+            "guess": "unsure",
+            "label": "We can't tell for sure whether a person or AI wrote this. Nothing is being held against you, and you can ask for a review if you'd like.",
+            "model_score": 0.4919,
+            "status": "decided",
+            "style_score": 0.6667,
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          },
+          {
+            "content_id": "d3399d30-e246-4387-93a7-acca9e798fad",
+            "creator_id": "c4_t3_5",
+            "event": "appeal",
+            "reasoning": "I wrote this myself (appeal check, trial 3, appeal 5).",
+            "status": "under_review",
+            "timestamp": "2026-11-12T16:14:47+00:00"
+          }
+        ],
+        "ok": true
+      }
+    ],
+    "fake_id": {
+      "status": 404,
+      "response": {
+        "error": "not_found"
+      },
+      "log_entries_before": 477,
+      "log_entries_after": 477,
+      "ok": true
+    }
+  }
+]

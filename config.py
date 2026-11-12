@@ -54,8 +54,8 @@ DETECTOR_MAX_TOKENS = 400
 # down BEFORE you code it, and to put the numbers in your README. Whatever you
 # decide, it goes here.
 
-WEIGHT_MODEL_SIGNAL = 0.5
-WEIGHT_STYLE_SIGNAL = 0.5
+WEIGHT_MODEL_SIGNAL = 0.8
+WEIGHT_STYLE_SIGNAL = 0.2
 
 # When the two signals are further apart than DISAGREEMENT_GAP, the combined
 # score is pulled toward 0.5 by DISAGREEMENT_PULL (0.5 halves its distance from
