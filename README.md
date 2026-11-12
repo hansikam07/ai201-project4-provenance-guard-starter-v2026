@@ -239,6 +239,20 @@ The first entry in that output is an earlier calibration submission (`creator_id
 - *What came back:* a working service and a table in which a plain human paragraph scored 0.77 and was guessed AI.
 - *What I changed:* nothing in the thresholds. I chose to keep the 0.35 and 0.65 bands and report the false positive as a finding rather than tune it away on five samples.
 
+**Unit 8 — Moment 1**
+
+- *What I asked for:* I used Claude to plan each milestone, and Claude Code to run the attack set, write the 5 AI test texts for my criteria, build `scenarios.py`, and fill in the README from the results files.
+- *What came back:* a full attack run, the 5 AI texts, a `scenarios.py` holding my 9 texts and an appeal check, and README drafts. Claude Code's first summary of the attack results added the counts up wrong. It reported 37 held next to 15 broke and 9 ambiguous, which comes to 61, not 56.
+- *What I changed:* I had the counts recomputed by script and the 9 ambiguous attacks resolved by re-scoring them. The final counts are 38 held and 18 broke.
+
+**Unit 8 — Moment 2**
+
+- *What I asked for:* one improvement, based on the diagnosis evidence.
+- *What came back:* Claude suggested reweighting the signals to 0.8 model and 0.2 style, because the style signal was flat between my AI and human texts while the model signal did the separating.
+- *What I changed:* I agreed to it and made only that change. It only partly helped: 35 held and 21 broke after, against 38 and 18 before.
+
+**Disclosure:** I used AI to help me write my plans, Claude Code for code changes, and to help me with logic when I don't know. In this unit, Claude Code wrote the 5 AI test texts for criteria 2 and 3 (the 9 human texts are my own writing, pasted as written), ran the attacks, and drafted README text from the results files. The worst-outcome pick (FP03) and the choice to let AI text through rather than accuse writers are my own decisions.
+
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
 ---
@@ -709,14 +723,26 @@ Against before: the highest combined score among my 9 human texts went from 0.63
 <!-- For each attack still getting through and each criterion still missed:
      what you'd do, and why you stopped. -->
 
+Scores below are the after-run numbers from `results/attack_marks_after.md` and `results/run_2026-11-12_1014_after.md`.
 
+**FP02 to FP07 (real writing labeled AI, signal one).** After the reweight they score 0.7315, 0.7796, 0.7794, 0.7935, 0.8176 and 0.8331. I would raise `AI_THRESHOLD` above 0.65 so only the most confident cases get the AI label, but the numbers don't give me a value I can defend. My own five AI texts score between 0.6603 and 0.8375, so they overlap the false positives (0.7315 to 0.8331). Raising the line to 0.80 clears FP02 to FP05 but leaves FP06 and FP07 labeled AI, and only 1 of my 5 AI texts is still labeled AI. At 0.84 all six false positives drop to "unsure", but so do all five of my AI texts, and only EV10 (0.9505) and the repeated-letter MF05 (0.9314) are left with the AI label. The cost is the same at every value: more AI text labeled "unsure" and less caught. So I am not naming a fix value. *Why I stopped:* this unit allows one improvement and I used it on the weights.
+
+**EV01 to EV09 (AI text not caught).** 9 of the 10 evasion attacks broke before and after the reweight; only EV10 was caught. I would replace or retune the style signal, since it separated my AI and human texts by -0.066 (AI mean minus human mean). *Why I stopped:* the same one-change limit, and a new signal needs its own testing.
+
+**Criteria 2 and 3.** Criterion 2 (spread) is 0.2526 after the reweight against the 0.35 target. Criterion 3 is missed because none of my own texts reaches the "human" label: the lowest combined score among my 16 eval texts is 0.3714, against the 0.35 line. The fix is the same as above, a style signal that separates my AI texts from my human ones. Raising the AI threshold would not help either one: criterion 2 compares average scores, which a threshold does not change, and criterion 3 needs a score under the human line, which the AI threshold does not touch. *Why I stopped:* same one-change limit.
+
+**PI01, PI02, PI03 (injected text moved the score toward human).** Removing the instruction raises the combined score by 0.1368 for PI01, 0.3572 for PI02 and 0.1483 for PI03 (PI03 would move from "unsure" to "ai"). PI01 held before the reweight (0.0953) and broke after it. I would strip or ignore instruction-like text before scoring, or test each injected text against a baseline version without the instruction. *Why I stopped:* not enough time. The injected text was never obeyed: nothing in the code reads instructions, and it only shifted the scores.
+
+**MF05, MF06 and MF07 (non-writing or non-English text labeled AI).** After the reweight MF05 (4,000 repeated "a") scores 0.9314, MF06 (emoji only) 0.6988 and MF07 0.6626. MF07 is a real Arabic sentence that was "unsure" before the reweight and is now labeled AI. I would validate input before the signals see it, for example reject text with too few distinct words, and handle non-English text separately. That second part matters because the word splitter in `stylometry.py` only recognizes the letters a to z and digits, so Arabic text has no words as far as the style signal is concerned (its style score of 0.5 is three neutral values), and a rule based on distinct words would reject it too. *Why I stopped:* the one-change limit.
+
+**Criterion 1 passed with little to spare.** After the reweight my highest text (H1) scores 0.6312, only 0.0188 under the 0.65 line. The sample is 9 texts, not 10, and H1 and H2 are two versions of the same application answer, so a pass here says less than it looks like.
 
 **The trade I'd make if this ran for real:**
 
 <!-- Two sentences. Fewer wrong accusations means more AI text getting through.
      Say which way you'd go and WHO PAYS FOR IT. -->
 
-
+If this ran for real, I would rather let AI text through than falsely accuse someone, because a person who gets flagged has to prove they wrote their own work, and some people (like the careful non-native speaker in FP03) might not be able to stand up for it. The downside is that we lose some integrity on the work that gets accepted, since AI text gets through as if a person wrote it, and that is unfair to the people who did their own work.
 
 <!-- ═════════════════════════════════════════════════════════════════════
 
