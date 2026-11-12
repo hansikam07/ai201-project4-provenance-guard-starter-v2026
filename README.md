@@ -718,6 +718,12 @@ Against before: the highest combined score among my 9 human texts went from 0.63
 
 ---
 
+## Stretch
+
+Stretch feature I am adding: a second measured improvement. Change: AI_THRESHOLD from 0.65 to 0.80, nothing else. Reason: my diagnosis shows real writing (FP02 to FP07) scoring 0.73 to 0.83 and being labeled AI, and I would rather let AI text through than falsely accuse writers.
+
+---
+
 ## What's Still Broken
 
 <!-- For each attack still getting through and each criterion still missed:
